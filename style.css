@@ -1,0 +1,2710 @@
+
+/* =========================================================
+   3D CYBERSECURITY PORTFOLIO
+   PROFESSIONAL BLACK NEON EDITION
+   Theme: Black + Neon Green + Electric Blue
+========================================================= */
+
+
+/* =========================================================
+   1. ROOT VARIABLES
+========================================================= */
+
+:root {
+    --bg: #02060b;
+    --bg-secondary: #050d14;
+
+    --panel: rgba(9, 22, 31, 0.88);
+    --panel2: #07131d;
+
+    --line: rgba(0, 255, 190, 0.20);
+    --line-blue: rgba(0, 157, 255, 0.22);
+
+    --text: #e9f5f4;
+    --muted: #8ca4ad;
+
+    --green: #00ffc3;
+    --green-dark: #00b98c;
+
+    --cyan: #00d9ff;
+    --blue: #087bff;
+
+    --danger: #ff4d6d;
+    --success: #00ffc3;
+
+    --font-head: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --shadow-green:
+        0 0 15px rgba(0, 255, 195, 0.15),
+        0 0 40px rgba(0, 255, 195, 0.05);
+
+    --shadow-blue:
+        0 0 15px rgba(0, 157, 255, 0.15);
+
+    --transition: 0.3s ease;
+}
+
+
+/* =========================================================
+   2. GLOBAL RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    position: relative;
+}
+
+body,
+button,
+input,
+textarea {
+    font-family: var(--font-body);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+::selection {
+    background: var(--green);
+    color: #02060b;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #02060b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        var(--green),
+        var(--blue)
+    );
+    border-radius: 20px;
+}
+
+
+/* =========================================================
+   3. CYBER BACKGROUND CONTAINER
+========================================================= */
+
+.cyber-background {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    perspective: 1000px;
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            rgba(0, 255, 195, 0.035),
+            transparent 55%
+        ),
+        #02060b;
+}
+
+
+/* =========================================================
+   4. AMBIENT GLOW
+========================================================= */
+
+.ambient-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.13;
+    pointer-events: none;
+}
+
+.glow-green {
+    top: 10%;
+    left: -200px;
+    background: var(--green);
+    animation: ambientGreen 12s ease-in-out infinite alternate;
+}
+
+.glow-blue {
+    right: -200px;
+    bottom: 0;
+    background: var(--blue);
+    animation: ambientBlue 14s ease-in-out infinite alternate;
+}
+
+@keyframes ambientGreen {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(120px, 80px);
+    }
+}
+
+@keyframes ambientBlue {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-100px, -80px);
+    }
+}
+
+
+/* =========================================================
+   5. CYBER GRID
+========================================================= */
+
+.cyber-grid,
+.grid-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image:
+        linear-gradient(
+            rgba(0, 255, 195, 0.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 255, 195, 0.045) 1px,
+            transparent 1px
+        );
+    background-size: 55px 55px;
+}
+
+.cyber-grid {
+    position: absolute;
+    opacity: 0.35;
+    transform: perspective(700px) rotateX(58deg) scale(1.7);
+    transform-origin: center bottom;
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 30%,
+        black 80%,
+        transparent
+    );
+    animation: gridMove 25s linear infinite;
+}
+
+.grid-bg {
+    position: fixed;
+    opacity: 0.18;
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 25%,
+        black 75%,
+        transparent
+    );
+    animation: gridMove 35s linear infinite;
+}
+
+@keyframes gridMove {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 550px;
+    }
+}
+
+
+/* =========================================================
+   6. NOISE OVERLAY
+========================================================= */
+
+.noise {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================================
+   7. PARTICLES AND MATRIX CANVAS
+========================================================= */
+
+#particles-js {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#particles-js canvas {
+    display: block;
+}
+
+#binary-rain {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   8. MAIN CONTENT LAYERS
+========================================================= */
+
+main,
+nav,
+footer {
+    position: relative;
+    z-index: 5;
+}
+
+section {
+    position: relative;
+    z-index: 5;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+.section-padding {
+    padding: 115px 0;
+}
+
+
+/* =========================================================
+   9. NAVBAR
+========================================================= */
+
+.navbar {
+    padding: 18px 0;
+    background: rgba(2, 6, 11, 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(0, 255, 195, 0.09);
+    transition: var(--transition);
+}
+
+.navbar-brand {
+    font-family: var(--font-head);
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 2px;
+}
+
+.navbar-brand:hover {
+    color: var(--green);
+}
+
+.brand-bracket {
+    color: var(--green);
+}
+
+.brand-dot {
+    color: var(--green);
+}
+
+.navbar-nav {
+    gap: 12px;
+}
+
+.nav-link {
+    color: var(--muted) !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 13px !important;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    bottom: 4px;
+    width: 0;
+    height: 2px;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    transition: var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--green) !important;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: calc(100% - 26px);
+}
+
+.nav-link.nav-cta {
+    color: var(--green) !important;
+    border: 1px solid rgba(0, 255, 195, 0.35);
+    border-radius: 5px;
+    margin-left: 12px;
+    padding: 10px 17px !important;
+}
+
+.nav-link.nav-cta::after {
+    display: none;
+}
+
+.nav-link.nav-cta:hover {
+    background: rgba(0, 255, 195, 0.10);
+    box-shadow: var(--shadow-green);
+}
+
+.nav-cta i {
+    margin-left: 7px;
+    font-size: 11px;
+}
+
+.navbar-toggler {
+    border: 1px solid rgba(0, 255, 195, 0.35);
+    padding: 8px 10px;
+    box-shadow: none !important;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+
+/* =========================================================
+   10. HERO SECTION
+========================================================= */
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 130px 0 100px;
+    overflow: hidden;
+
+}
+
+.hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 15px;
+    border: 1px solid rgba(0, 255, 195, 0.25);
+    border-radius: 30px;
+    background: rgba(0, 255, 195, 0.045);
+    color: var(--green);
+    font-family: var(--font-head);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 28px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+    animation: statusPulse 1.7s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+.status-dot.blue {
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+}
+
+@keyframes statusPulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+        transform: scale(0.75);
+    }
+}
+
+.hero-intro {
+    color: var(--muted);
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.hero-title {
+    font-family: var(--font-head);
+    font-size: clamp(42px, 7vw, 82px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 20px;
+}
+
+.hero-title span {
+    display: block;
+    color: var(--green);
+    text-shadow:
+        0 0 15px rgba(0, 255, 195, 0.25),
+        0 0 45px rgba(0, 255, 195, 0.10);
+}
+
+.hero-role {
+    min-height: 35px;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.role-prefix {
+    color: var(--muted);
+}
+
+#typed-role {
+    color: var(--green);
+}
+
+.typed-cursor {
+    color: var(--green);
+}
+
+.hero-description {
+    max-width: 550px;
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 15px;
+    margin-bottom: 32px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.btn-primary-custom,
+.btn-outline-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    min-height: 48px;
+    padding: 13px 22px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    transition: var(--transition);
+}
+
+.btn-primary-custom {
+    background: var(--green);
+    color: #00130e;
+    border: 1px solid var(--green);
+}
+
+.btn-primary-custom:hover {
+    color: #00130e;
+    background: #6bffdb;
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px rgba(0, 255, 195, 0.30);
+}
+
+.btn-outline-custom {
+    color: var(--green);
+    background: rgba(0, 255, 195, 0.025);
+    border: 1px solid rgba(0, 255, 195, 0.40);
+}
+
+.btn-outline-custom:hover {
+    color: var(--green);
+    background: rgba(0, 255, 195, 0.10);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-green);
+}
+
+.hero-socials {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hero-socials a,
+.footer-socials a {
+    width: 39px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    border: 1px solid rgba(0, 255, 195, 0.15);
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+.hero-socials a:hover,
+.footer-socials a:hover {
+    color: var(--green);
+    border-color: var(--green);
+    background: rgba(0, 255, 195, 0.07);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-green);
+}
+
+
+/* =========================================================
+   11. HERO 3D VISUAL
+========================================================= */
+
+.hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 490px;
+    position: relative;
+}
+
+.hero-scene {
+    position: relative;
+    width: 390px;
+    height: 390px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out;
+}
+
+.core-glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(0, 255, 195, 0.10);
+    filter: blur(65px);
+    animation: coreGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes coreGlow {
+    from {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 0.9;
+        transform: scale(1.2);
+    }
+}
+
+.cyber-shield {
+    width: 165px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(
+        50% 0,
+        95% 18%,
+        88% 72%,
+        50% 100%,
+        12% 72%,
+        5% 18%
+    );
+    background: linear-gradient(
+        145deg,
+        rgba(0, 255, 195, 0.75),
+        rgba(0, 157, 255, 0.40)
+    );
+    filter: drop-shadow(0 0 25px rgba(0, 255, 195, 0.4));
+    animation: shieldFloat 5s ease-in-out infinite;
+    z-index: 3;
+}
+
+.shield-inner {
+    width: 155px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    clip-path: polygon(
+        50% 0,
+        95% 18%,
+        88% 72%,
+        50% 100%,
+        12% 72%,
+        5% 18%
+    );
+    background: linear-gradient(
+        145deg,
+        #071b1c,
+        #04111d
+    );
+}
+
+.shield-inner i {
+    font-size: 62px;
+    color: var(--green);
+    text-shadow: 0 0 22px var(--green);
+}
+
+.shield-inner span {
+    font-family: var(--font-head);
+    color: var(--green);
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+@keyframes shieldFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotateY(-8deg);
+    }
+
+    50% {
+        transform: translateY(-14px) rotateY(8deg);
+    }
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid rgba(0, 255, 195, 0.40);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+}
+
+.orbit-one {
+    width: 300px;
+    height: 130px;
+    transform: rotate(-28deg);
+    animation: orbitSpin 12s linear infinite;
+}
+
+.orbit-two {
+    width: 320px;
+    height: 160px;
+    transform: rotate(55deg);
+    border-color: rgba(0, 157, 255, 0.45);
+    animation: orbitSpinReverse 15s linear infinite;
+}
+
+.orbit-three {
+    width: 245px;
+    height: 245px;
+    border-style: dashed;
+    border-color: rgba(0, 255, 195, 0.25);
+    animation: orbitSpin 25s linear infinite;
+}
+
+@keyframes orbitSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes orbitSpinReverse {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.floating-chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 13px;
+    border: 1px solid rgba(0, 255, 195, 0.22);
+    background: rgba(5, 15, 22, 0.90);
+    backdrop-filter: blur(12px);
+    color: var(--green);
+    font-family: var(--font-head);
+    font-size: 8px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    box-shadow: var(--shadow-green);
+    animation: chipFloat 5s ease-in-out infinite;
+}
+
+.floating-chip i {
+    font-size: 13px;
+}
+
+.chip-one {
+    top: 55px;
+    right: -15px;
+}
+
+.chip-two {
+    bottom: 80px;
+    left: -25px;
+    animation-delay: 1s;
+}
+
+.chip-three {
+    bottom: 5px;
+    right: 15px;
+    animation-delay: 2s;
+}
+
+@keyframes chipFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.hero-scan {
+    position: absolute;
+    width: 260px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--green),
+        transparent
+    );
+    box-shadow: 0 0 15px var(--green);
+    animation: heroScan 4s ease-in-out infinite;
+    z-index: 4;
+}
+
+@keyframes heroScan {
+    0%,
+    100% {
+        transform: translateY(-120px);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    75% {
+        transform: translateY(120px);
+        opacity: 0;
+    }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-family: var(--font-head);
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.scroll-indicator i {
+    color: var(--green);
+    animation: scrollBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(7px);
+    }
+}
+
+
+/* =========================================================
+   12. SECTION HEADINGS
+========================================================= */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 65px;
+}
+
+.section-tag {
+    display: inline-block;
+    color: var(--green);
+    font-family: var(--font-head);
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+}
+
+.section-heading h2 {
+    color: var(--text);
+    font-family: var(--font-head);
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 700;
+    margin-bottom: 15px;
+
+    /* Deep dark shadow */
+    text-shadow:
+        0 3px 5px #000,
+        0 6px 15px rgba(0, 0, 0, 1),
+        0 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+.section-heading h2 span {
+    color: var(--green);
+
+    /* Neon green shadow */
+    text-shadow:
+        0 2px 5px #000,
+        0 0 10px rgba(0, 255, 190, 0.25),
+        0 5px 20px rgba(0, 0, 0, 1);
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+
+    /* Paragraph shadow */
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 1),
+        0 4px 12px rgba(0, 0, 0, 0.95);
+}
+
+/* =========================================================
+   13. ABOUT SECTION
+========================================================= */
+
+.about-visual {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.about-card {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    min-height: 350px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgba(0, 255, 195, 0.23);
+    border-radius: 12px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 195, 0.09),
+            transparent 65%
+        ),
+        rgba(7, 19, 29, 0.85);
+    box-shadow: var(--shadow-green);
+    overflow: hidden;
+}
+
+.about-card::before,
+.about-card::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-color: var(--green);
+    border-style: solid;
+    opacity: 0.55;
+}
+
+.about-card::before {
+    top: 10px;
+    left: 10px;
+    border-width: 1px 0 0 1px;
+}
+
+.about-card::after {
+    right: 10px;
+    bottom: 10px;
+    border-width: 0 1px 1px 0;
+}
+
+.about-card-icon {
+    font-size: 85px;
+    color: var(--green);
+    text-shadow: 0 0 30px rgba(0, 255, 195, 0.4);
+    margin-bottom: 25px;
+}
+
+.about-card h3 {
+    font-family: var(--font-head);
+    font-size: 19px;
+    letter-spacing: 3px;
+    color: var(--green);
+}
+
+.about-card p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.about-card-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid var(--line);
+    padding-top: 17px;
+    margin-top: 35px;
+    font-family: var(--font-head);
+    font-size: 9px;
+}
+
+.about-card-footer span {
+    color: var(--muted);
+}
+
+.about-card-footer strong {
+    color: var(--green);
+}
+
+.about-content h3 {
+    font-family: var(--font-head);
+    font-size: 27px;
+    font-weight: 700;
+    margin-bottom: 22px;
+
+    color: #eafff9;
+
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 1),
+        0 4px 12px rgba(0, 0, 0, 1),
+        0 0 15px rgba(0, 255, 190, 0.18);
+}
+
+.about-content h3 span {
+    color: var(--green);
+}
+
+.about-content p {
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.about-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.about-details div {
+    padding: 15px;
+    border-left: 2px solid var(--green);
+    background: rgba(0, 255, 195, 0.035);
+}
+
+.about-details span {
+    display: block;
+    font-family: var(--font-head);
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 7px;
+}
+
+.about-details strong {
+    color: var(--text);
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   14. GLASS CARDS
+========================================================= */
+
+.glass-card {
+    height: 100%;
+    position: relative;
+    padding: 30px;
+    border: 1px solid rgba(0, 255, 195, 0.14);
+    border-radius: 9px;
+    background: linear-gradient(
+        145deg,
+        rgba(10, 26, 35, 0.91),
+        rgba(5, 13, 21, 0.91)
+    );
+    backdrop-filter: blur(12px);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--green);
+    box-shadow: 0 0 15px var(--green);
+    transition: width 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 255, 195, 0.45);
+    box-shadow: var(--shadow-green);
+}
+
+.glass-card:hover::before {
+    width: 100%;
+}
+
+
+/* =========================================================
+   15. SKILLS SECTION
+========================================================= */
+
+.skill-card {
+    min-height: 245px;
+}
+
+.skill-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    background: rgba(0, 255, 195, 0.07);
+    border: 1px solid rgba(0, 255, 195, 0.20);
+    border-radius: 9px;
+    font-size: 24px;
+    margin-bottom: 24px;
+    transition: var(--transition);
+}
+
+.skill-card:hover .skill-icon {
+    background: var(--green);
+    color: #02060b;
+    transform: rotateY(180deg);
+}
+
+.skill-card h3 {
+    font-family: var(--font-head);
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   16. TAGS
+========================================================= */
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tags span {
+    display: inline-block;
+    padding: 7px 10px;
+    border: 1px solid rgba(0, 255, 195, 0.18);
+    border-radius: 4px;
+    background: rgba(0, 255, 195, 0.035);
+    color: #9db8b7;
+    font-size: 10px;
+    transition: var(--transition);
+}
+
+.tags span:hover {
+    color: var(--green);
+    border-color: var(--green);
+    background: rgba(0, 255, 195, 0.09);
+}
+
+
+/* =========================================================
+   17. PROJECTS SECTION
+========================================================= */
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
+}
+
+.project-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    border: 1px solid rgba(0, 255, 195, 0.25);
+    background: rgba(0, 255, 195, 0.07);
+    border-radius: 10px;
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+.project-card h3 {
+    font-family: var(--font-head);
+    font-size: 17px;
+    margin-bottom: 15px;
+}
+
+.project-card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+    flex-grow: 1;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 22px;
+    transition: var(--transition);
+}
+
+.project-link:hover {
+    color: #ffffff;
+    gap: 15px;
+}
+
+
+/* =========================================================
+   18. TIMELINE
+========================================================= */
+
+.timeline {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    padding-left: 35px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--green),
+        var(--blue),
+        transparent
+    );
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -32px;
+    top: 28px;
+    width: 13px;
+    height: 13px;
+    background: var(--green);
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--green);
+}
+
+.timeline-card {
+    padding: 25px 28px;
+    background: rgba(7, 19, 29, 0.80);
+    border: 1px solid rgba(0, 255, 195, 0.16);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.timeline-card:hover {
+    border-color: var(--green);
+    transform: translateX(6px);
+    box-shadow: var(--shadow-green);
+}
+
+.timeline-date {
+    display: inline-block;
+    font-family: var(--font-head);
+    color: var(--green);
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.timeline-card h3 {
+    font-family: var(--font-head);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.timeline-card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   19. CONTACT SECTION
+========================================================= */
+
+.contact-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 55px 30px;
+    text-align: center;
+    border: 1px solid rgba(0, 255, 195, 0.23);
+    border-radius: 12px;
+    background:
+        radial-gradient(
+            circle at center top,
+            rgba(0, 255, 195, 0.10),
+            transparent 60%
+        ),
+        rgba(7, 19, 29, 0.80);
+    box-shadow: var(--shadow-green);
+}
+
+.contact-icon {
+    font-size: 48px;
+    color: var(--green);
+    margin-bottom: 24px;
+    text-shadow: 0 0 25px var(--green);
+}
+
+.contact-wrapper h3 {
+    font-family: var(--font-head);
+    font-size: 24px;
+    margin-bottom: 17px;
+}
+
+.contact-wrapper p {
+    max-width: 480px;
+    margin: 0 auto 27px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.contact-email {
+    margin-top: 22px;
+    color: var(--green);
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   20. FOOTER
+========================================================= */
+
+.footer {
+    padding: 50px 0 20px;
+    border-top: 1px solid rgba(0, 255, 195, 0.12);
+    background: rgba(2, 6, 11, 0.92);
+}
+
+.footer-content {
+    text-align: center;
+    padding-bottom: 35px;
+}
+
+.footer-brand {
+    font-family: var(--font-head);
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 3px;
+}
+
+.footer-brand span {
+    color: var(--green);
+}
+
+.footer-content p {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 15px 0 22px;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 255, 195, 0.10);
+}
+
+.footer-bottom p {
+    color: var(--muted);
+    font-size: 11px;
+    margin: 0;
+}
+
+.footer-bottom a {
+    color: var(--green);
+    font-size: 11px;
+}
+
+.footer-bottom a i {
+    margin-left: 5px;
+}
+
+
+/* =========================================================
+   21. BACK TO TOP BUTTON
+========================================================= */
+
+#backToTop {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 1000;
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--green);
+    border-radius: 5px;
+    background: rgba(0, 255, 195, 0.10);
+    color: var(--green);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: var(--transition);
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#backToTop:hover {
+    background: var(--green);
+    color: #02060b;
+    box-shadow: var(--shadow-green);
+}
+
+
+/* =========================================================
+   22. HOLOGRAPHIC PANEL BASE
+========================================================= */
+
+.info-panel,
+.holo-panel {
+    position: absolute;
+    color: var(--text);
+    font-family: var(--font-head);
+    border: 1px solid rgba(0, 255, 195, 0.25);
+    background: rgba(4, 17, 24, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+        0 0 20px rgba(0, 255, 195, 0.055),
+        inset 0 0 20px rgba(0, 255, 195, 0.025);
+    pointer-events: none;
+}
+
+.holo-panel {
+    width: 210px;
+    padding: 17px;
+    border-radius: 7px;
+    animation: holoFloat 7s ease-in-out infinite;
+}
+
+@keyframes holoFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -12px;
+    }
+}
+
+
+/* =========================================================
+   23. HOLOGRAPHIC PANEL HEADER
+========================================================= */
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--green);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 255, 195, 0.17);
+}
+
+.panel-content {
+    padding: 16px 0;
+}
+
+.data-line {
+    width: 100%;
+    height: 5px;
+    background: rgba(0, 255, 195, 0.16);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.data-line::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 65%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    animation: dataLoading 3s ease-in-out infinite alternate;
+}
+
+.data-line.short {
+    width: 55%;
+}
+
+.data-line.medium {
+    width: 75%;
+}
+
+@keyframes dataLoading {
+    from {
+        width: 20%;
+    }
+
+    to {
+        width: 90%;
+    }
+}
+
+.panel-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 45px;
+    margin-top: 15px;
+}
+
+.panel-bars i {
+    flex: 1;
+    height: 40%;
+    background: var(--green);
+    opacity: 0.65;
+    box-shadow: 0 0 7px rgba(0, 255, 195, 0.5);
+    animation: barPulse 1s ease-in-out infinite alternate;
+}
+
+.panel-bars i:nth-child(2n) {
+    animation-delay: 0.3s;
+}
+
+.panel-bars i:nth-child(3n) {
+    animation-delay: 0.6s;
+}
+
+@keyframes barPulse {
+    from {
+        height: 15%;
+    }
+
+    to {
+        height: 100%;
+    }
+}
+
+.panel-footer {
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 255, 195, 0.15);
+}
+
+
+/* =========================================================
+   24. HOLOGRAPHIC PANEL POSITIONS
+========================================================= */
+
+.panel-left {
+    top: 28%;
+    left: 3%;
+}
+
+.panel-right {
+    top: 28%;
+    right: 3%;
+    border-color: rgba(0, 157, 255, 0.28);
+    animation-delay: 1.2s;
+}
+
+.panel-top {
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    text-align: center;
+    animation-delay: 2s;
+}
+
+.panel-top .top-label {
+    color: var(--green);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.top-line {
+    height: 1px;
+    margin: 10px 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--green),
+        transparent
+    );
+}
+
+.top-code {
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   25. NETWORK VISUAL
+========================================================= */
+
+.network-visual {
+    height: 90px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    padding: 12px 5px;
+}
+
+.network-visual span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+    animation: networkPulse 1.8s ease-in-out infinite alternate;
+}
+
+.network-visual span:nth-child(2n) {
+    animation-delay: 0.5s;
+}
+
+.network-visual span:nth-child(3n) {
+    animation-delay: 0.9s;
+}
+
+@keyframes networkPulse {
+    from {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+
+/* =========================================================
+   26. ENERGY PORTAL
+========================================================= */
+
+.energy-portal {
+    position: absolute;
+    width: 310px;
+    height: 310px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.portal-outer {
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 255, 195, 0.25);
+    box-shadow:
+        0 0 20px rgba(0, 255, 195, 0.08),
+        inset 0 0 25px rgba(0, 255, 195, 0.08);
+    animation: portalOuter 15s linear infinite;
+}
+
+@keyframes portalOuter {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    to {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.portal-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transform-style: preserve-3d;
+}
+
+.energy-portal .ring-one {
+    width: 230px;
+    height: 230px;
+    border-top-color: var(--green);
+    border-bottom-color: rgba(0, 255, 195, 0.15);
+    box-shadow: 0 0 20px rgba(0, 255, 195, 0.15);
+    animation: portalRotate 7s linear infinite;
+}
+
+.energy-portal .ring-two {
+    width: 195px;
+    height: 195px;
+    border-left-color: var(--cyan);
+    border-right-color: rgba(0, 157, 255, 0.15);
+    animation: portalRotateReverse 9s linear infinite;
+}
+
+.energy-portal .ring-three {
+    width: 155px;
+    height: 155px;
+    border-top-color: rgba(0, 255, 195, 0.7);
+    border-left-color: rgba(0, 255, 195, 0.2);
+    animation: portalRotate 5s linear infinite;
+}
+
+@keyframes portalRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes portalRotateReverse {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.portal-core {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 255, 195, 0.35),
+        rgba(0, 157, 255, 0.12),
+        transparent 75%
+    );
+    box-shadow:
+        0 0 25px rgba(0, 255, 195, 0.3),
+        0 0 65px rgba(0, 255, 195, 0.15);
+    animation: portalCorePulse 3s ease-in-out infinite alternate;
+}
+
+.core-light {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow:
+        0 0 15px var(--green),
+        0 0 35px var(--green),
+        0 0 65px var(--cyan);
+}
+
+@keyframes portalCorePulse {
+    from {
+        transform: scale(0.85);
+        opacity: 0.65;
+    }
+
+    to {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+.portal-orbit {
+    position: absolute;
+    width: 290px;
+    height: 100px;
+    border: 1px solid rgba(0, 255, 195, 0.3);
+    border-radius: 50%;
+}
+
+.portal-orbit.orbit-one {
+    transform: rotate(45deg);
+    animation: portalRotate 13s linear infinite;
+}
+
+.portal-orbit.orbit-two {
+    transform: rotate(-45deg);
+    border-color: rgba(0, 157, 255, 0.3);
+    animation: portalRotateReverse 16s linear infinite;
+}
+
+
+/* =========================================================
+   27. ENERGY PARTICLES
+========================================================= */
+
+.energy-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.energy-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+    animation: energyFloat 5s ease-in-out infinite alternate;
+}
+
+@keyframes energyFloat {
+    from {
+        transform: translate3d(0, 0, 0);
+        opacity: 0.2;
+    }
+
+    to {
+        transform: translate3d(20px, -35px, 0);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   28. HOLOGRAPHIC SCANLINE
+========================================================= */
+
+.holo-scanline {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        transparent 49.5%,
+        rgba(0, 255, 195, 0.035) 50%,
+        transparent 50.5%
+    );
+    background-size: 100% 7px;
+    opacity: 0.5;
+}
+
+
+/* =========================================================
+   29. EXTRA CYBERSECURITY PANELS
+========================================================= */
+
+.extra-panel {
+    width: 210px;
+    min-height: 145px;
+    z-index: 3;
+    padding: 15px;
+    border-radius: 7px;
+    animation: extraPanelFloat 7s ease-in-out infinite;
+    opacity: 1;
+}
+
+@keyframes extraPanelFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -9px;
+    }
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--green);
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 255, 195, 0.17);
+    opacity: 1;
+}
+
+.panel-heading i {
+    font-size: 13px;
+}
+
+.panel-value {
+    color: var(--green);
+    font-size: 14px;
+    opacity: 1;
+    font-weight: 700;
+    margin-top: 15px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px rgba(0, 255, 195, 0.35);
+    overflow-wrap: anywhere;
+   
+}
+
+.panel-small {
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-top: 7px;
+}
+
+.panel-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    font-size: 8px;
+    margin-top: 14px;
+}
+
+
+/* =========================================================
+   30. EXTRA PANEL POSITIONS
+========================================================= */
+
+.ip-panel {
+    top: 13%;
+    left: 3%;
+    animation-delay: 0.2s;
+    opacity: 1;
+}
+
+.firewall-panel {
+    top: 14%;
+    right: 3%;
+    animation-delay: 0.8s;
+}
+
+.encryption-panel {
+    top: 72%;
+    left: 24%;
+    animation-delay: 1.3s;
+}
+
+.vuln-panel {
+    top: 72%;
+    right: 24%;
+    animation-delay: 1.8s;
+}
+
+.server-panel {
+    top: 43%;
+    left: 1%;
+    animation-delay: 0.5s;
+}
+
+.packet-panel {
+    top: 43%;
+    right: 1%;
+    animation-delay: 1.5s;
+}
+
+.access-panel {
+    bottom: 3%;
+    left: 43%;
+    animation-delay: 2s;
+}
+
+.forensic-panel {
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: forensicFloat 8s ease-in-out infinite;
+}
+
+@keyframes forensicFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 8px;
+    }
+}
+
+
+/* =========================================================
+   31. TERMINAL PANEL
+========================================================= */
+
+.terminal-panel {
+    width: 245px;
+    min-height: 150px;
+    left: 3%;
+    bottom: 5%;
+    animation-delay: 1s;
+}
+
+.terminal-content {
+    margin-top: 12px;
+    font-family: monospace;
+    font-size: 8px;
+    line-height: 1.9;
+    color: #91b5ac;
+    overflow-wrap: anywhere;
+}
+
+.terminal-content div {
+    animation: terminalAppear 0.3s ease;
+}
+
+@keyframes terminalAppear {
+    from {
+        opacity: 8;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   32. CLOCK PANEL
+========================================================= */
+
+.clock-panel {
+    width: 190px;
+    min-height: 120px;
+    right: 3%;
+    bottom: 5%;
+    animation-delay: 1.4s;
+}
+
+.clock-panel .panel-value {
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.clock-panel .panel-small {
+    color: var(--cyan);
+}
+
+
+/* =========================================================
+   33. HOLOGRAM CURSOR
+========================================================= */
+
+#hologram-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    z-index: 2147483647;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease;
+    mix-blend-mode: screen;
+}
+
+#hologram-cursor.active {
+    opacity: 1;
+}
+
+.cursor-core {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: white;
+    box-shadow:
+        0 0 8px var(--green),
+        0 0 18px var(--green);
+}
+
+.cursor-ring {
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 255, 195, 0.4);
+}
+
+#hologram-cursor .ring-one {
+    animation: cursorSpin 5s linear infinite;
+}
+
+#hologram-cursor .ring-two {
+    inset: 9px;
+    border-color: var(--cyan);
+    border-style: dashed;
+    animation: cursorSpinReverse 8s linear infinite;
+}
+
+@keyframes cursorSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes cursorSpinReverse {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.cursor-crosshair {
+    position: absolute;
+    inset: -7px;
+    border: 1px solid rgba(0, 255, 195, 0.15);
+    border-radius: 50%;
+}
+
+.cursor-crosshair::before,
+.cursor-crosshair::after {
+    content: "";
+    position: absolute;
+    background: var(--green);
+}
+
+.cursor-crosshair::before {
+    width: 1px;
+    height: 7px;
+    left: 50%;
+    top: -6px;
+}
+
+.cursor-crosshair::after {
+    width: 7px;
+    height: 1px;
+    top: 50%;
+    right: -6px;
+}
+
+#hologram-cursor.hover {
+    filter: brightness(1.7);
+    scale: 1.2;
+}
+
+
+/* =========================================================
+   34. OPTIONAL CURSOR GLOW
+========================================================= */
+
+#cursor-glow {
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 255, 195, 0.08),
+        transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   35. EXTRA PANEL HOVER SUPPORT
+========================================================= */
+
+.panel-active {
+    filter: brightness(1.25);
+    border-color: rgba(0, 255, 195, 0.55);
+}
+
+
+/* =========================================================
+   36. RESPONSIVE: LARGE TABLETS
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .extra-panel {
+        transform: scale(0.85);
+    }
+
+    .panel-left {
+        left: 1%;
+    }
+
+    .panel-right {
+        right: 1%;
+    }
+
+    .hero-title {
+        font-size: 68px;
+    }
+
+    .hero-scene {
+        transform: scale(0.9);
+    }
+}
+
+
+/* =========================================================
+   37. RESPONSIVE: TABLETS
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .section-padding {
+        padding: 85px 0;
+    }
+
+    .navbar-collapse {
+        margin-top: 15px;
+        padding: 15px;
+        background: rgba(3, 12, 18, 0.97);
+        border: 1px solid rgba(0, 255, 195, 0.15);
+        border-radius: 8px;
+    }
+
+    .navbar-nav {
+        align-items: stretch !important;
+        gap: 4px;
+    }
+
+    .nav-link {
+        padding: 11px 10px !important;
+    }
+
+    .nav-link.nav-cta {
+        margin: 8px 0 0;
+        display: inline-block;
+        width: fit-content;
+    }
+
+    .hero-section {
+        padding-top: 140px;
+    }
+
+    .hero-visual {
+        min-height: 400px;
+        margin-top: 40px;
+    }
+
+    .hero-scene {
+        transform: scale(0.85);
+    }
+
+    .extra-panel,
+    .holo-panel,
+    .energy-portal {
+        opacity: 0.55;
+    }
+
+    .extra-panel {
+        display: none;
+    }
+
+    .panel-left {
+        left: -70px;
+    }
+
+    .panel-right {
+        right: -70px;
+    }
+
+    .panel-top {
+        top: 100px;
+    }
+
+    .timeline {
+        max-width: 700px;
+    }
+}
+
+
+/* =========================================================
+   38. RESPONSIVE: MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .section-padding {
+        padding: 75px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 42px;
+    }
+
+    .hero-section {
+        min-height: auto;
+        padding: 145px 0 90px;
+        text-align: center;
+    }
+
+    .hero-status {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .hero-title {
+        font-size: clamp(42px, 12vw, 65px);
+    }
+
+    .hero-role {
+        font-size: 16px;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 13px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-socials {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        min-height: 330px;
+        margin-top: 25px;
+    }
+
+    .hero-scene {
+        transform: scale(0.72);
+    }
+
+    .panel-left,
+    .panel-right,
+    .panel-top,
+    .extra-panel {
+        display: none;
+    }
+
+    .energy-portal {
+        opacity: 0.22;
+        transform: translate(-50%, -50%) scale(0.75);
+    }
+
+    .about-content {
+        margin-top: 30px;
+    }
+
+    .about-content h3 {
+        font-size: 23px;
+    }
+
+    .glass-card {
+        padding: 25px;
+    }
+
+    .timeline {
+        padding-left: 28px;
+    }
+
+    .timeline-dot {
+        left: -25px;
+    }
+
+    .timeline-card {
+        padding: 22px;
+    }
+
+    .contact-wrapper {
+        padding: 40px 22px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .scroll-indicator {
+        bottom: 15px;
+    }
+}
+
+
+/* =========================================================
+   39. RESPONSIVE: SMALL MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+    .navbar {
+        padding: 13px 0;
+    }
+
+    .navbar-brand {
+        font-size: 21px;
+    }
+
+    .hero-title {
+        font-size: 43px;
+    }
+
+    .hero-status {
+        padding: 8px 10px;
+        font-size: 7px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons a {
+        width: 100%;
+    }
+
+    .hero-scene {
+        transform: scale(0.65);
+        transform-origin: center;
+    }
+
+    .hero-visual {
+        min-height: 290px;
+    }
+
+    .about-details {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 29px;
+    }
+
+    .section-heading p {
+        font-size: 12px;
+    }
+
+    .skill-card {
+        min-height: auto;
+    }
+
+    .project-card {
+        min-height: auto;
+    }
+
+    .contact-wrapper h3 {
+        font-size: 20px;
+    }
+
+    .contact-email {
+        font-size: 11px;
+        overflow-wrap: anywhere;
+    }
+
+    #backToTop {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .footer-bottom p {
+        line-height: 1.8;
+    }
+}
+
+
+/* =========================================================
+   40. TOUCH DEVICE CURSOR FALLBACK
+========================================================= */
+
+@media (hover: none), (pointer: coarse) {
+
+    #hologram-cursor,
+    #cursor-glow {
+        display: none !important;
+    }
+
+    body,
+    a,
+    button {
+        cursor: auto;
+    }
+
+}
+
+
+/* =========================================================
+   41. REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .hero-scene {
+        transform: none !important;
+    }
+
+}
+
+
+/* =========================================================
+   42. FINAL LAYER FIX
+========================================================= */
+
+.cyber-background {
+    isolation: isolate;
+}
+
+#hologram-cursor {
+    pointer-events: none !important;
+}
+
+.noise,
+.grid-bg,
+#particles-js,
+#binary-rain {
+    pointer-events: none !important;
+}
+
+main,
+nav,
+footer {
+    position: relative;
+    z-index: 5;
+}
+
+.navbar {
+    z-index: 1000;
+}
+
+#backToTop {
+    z-index: 1001;
+}
+/* ==========================================
+   ULTRA DARK CYBER PANELS
+========================================== */
+
+.ip-panel,
+.firewall-panel,
+.server-panel,
+.packet-panel,
+.encryption-panel,
+.vuln-panel,
+.access-panel,
+.forensic-panel,
+.terminal-panel,
+.clock-panel,
+.extra-panel,
+.info-panel,
+.holo-panel {
+
+    background: rgba(1, 4, 7, 0.692) !important;
+
+    background-image: linear-gradient(
+        145deg,
+        rgba(3, 12, 15, 0.98),
+        rgba(0, 4, 8, 0.99)
+    ) !important;
+
+    border: 1px solid rgba(0, 255, 190, 0.13) !important;
+
+    backdrop-filter: blur(22px) brightness(0.35) !important;
+    -webkit-backdrop-filter: blur(22px) brightness(0.35) !important;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.95),
+        0 0 8px rgba(0, 255, 190, 0.035),
+        inset 0 1px 0 rgba(0, 255, 190, 0.035) !important;
+
+    opacity: 1 !important;
+}
+
+/* Dark panel headings */
+.ip-panel h3,
+.firewall-panel h3,
+.server-panel h3,
+.packet-panel h3,
+.encryption-panel h3,
+.vuln-panel h3,
+.access-panel h3,
+.forensic-panel h3,
+.extra-panel h3,
+.info-panel h3,
+.holo-panel .panel-header {
+    color: #00dcb039 !important;
+}
+
+/* Secondary text */
+.extra-panel p,
+.extra-panel small,
+.info-panel p,
+.info-panel small,
+.holo-panel p,
+.holo-panel small {
+    color: #607a7d !important;
+}
+
+/* Important numbers */
+.extra-panel strong,
+.info-panel strong,
+.extra-panel .value,
+.info-panel .value {
+    color: #00f5bc4d !important;
+    text-shadow: 0 0 7px rgba(0, 255, 190, 0.20);
+}
+
+/* Subtle border hover */
+.ip-panel:hover,
+.firewall-panel:hover,
+.server-panel:hover,
+.packet-panel:hover,
+.encryption-panel:hover,
+.vuln-panel:hover,
+.access-panel:hover,
+.forensic-panel:hover,
+.terminal-panel:hover,
+.clock-panel:hover,
+.extra-panel:hover,
+.info-panel:hover,
+.holo-panel:hover {
+    border-color: rgba(0, 255, 190, 0.35) !important;
+
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.98),
+        0 0 12px rgba(0, 255, 190, 0.08) !important;
+}
